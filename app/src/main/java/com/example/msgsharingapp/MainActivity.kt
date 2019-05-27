@@ -40,6 +40,7 @@
 // *
 package com.example.msgsharingapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -56,6 +57,24 @@ class MainActivity : AppCompatActivity(){      /*this is class which represent o
             Log.i("MainActivity", "Button was clicked")
             /*log statements help developers that every thing working fine or not*/
             Toast.makeText(this,"Button was clicked",Toast.LENGTH_SHORT).show()
+        }
+        btnSendMessageToNextActivity.setOnClickListener {
+            val message: String = etUserMessage.text.toString()
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+            /*
+            * Intent is an operation to be performed
+            * it has two types:
+            * Explicit and implicit
+            * Explicit intent: when you know the target activity
+            * Implicit: when you do not know your target activity
+            * we are using explicit one
+            * */
+            val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra("user_message", message)
+            startActivity(intent)
+
+
 
         }
     }
