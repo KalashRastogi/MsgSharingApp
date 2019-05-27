@@ -73,8 +73,22 @@ class MainActivity : AppCompatActivity(){      /*this is class which represent o
             val intent = Intent(this, SecondActivity::class.java)
             intent.putExtra("user_message", message)
             startActivity(intent)
+            /*
+            * if we want to share data to some other application for that we use implicit intent
+            * because we dont know the choice of user*
+            * /
+            */
+            btnShareToOtherApps.setOnClickListener {
 
+                val messages: String = etUserMessage.text.toString()
 
+                val intents =Intent()
+                intents.action = Intent.ACTION_SEND
+                intents.putExtra(Intent.EXTRA_TEXT, messages)
+                intents.type = "text/plain"
+
+                startActivity(Intent.createChooser(intent, "Share to: "))
+            }
 
         }
     }
